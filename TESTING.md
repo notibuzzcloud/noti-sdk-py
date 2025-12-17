@@ -37,7 +37,7 @@ pip install .
 Si prefieres no instalar el paquete, puedes agregar el directorio al PYTHONPATH:
 
 ```bash
-export PYTHONPATH="${PYTHONPATH}:/Users/diegoquirozramirez/Documents/notibuzz/noti-sdk-py"
+export PYTHONPATH="${PYTHONPATH}:/Documents/notibuzz/noti-sdk-py"
 ```
 
 ## Configuración de Variables de Entorno

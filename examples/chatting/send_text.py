@@ -12,9 +12,9 @@ configure_client({
 def main():
     try:
         session_name = os.getenv('NOTI_SESSION_NAME', 'default')
-        chat_id = '51111111111@c.us'  # Change to real chatId
+        chat_id = '51111111111@c.us'  # Change to your real chatId
         
-        print('💬 Enviando mensaje de texto...')
+        print('💬 Sending text message...')
         
         result = send_message(
             body={
@@ -22,12 +22,12 @@ def main():
                 'payload': {
                     'session': session_name,
                     'chatId': chat_id,
-                    'text': '¡Hola desde noti-sdk-py! 👋'
+                    'text': 'Hello from noti-sdk-py! 👋'
                 }
             }
         )
         
-        print('✅ Mensaje enviado:', result)
+        print('✅ Message sent:', result)
     except Exception as error:
         print('❌ Error:', str(error))
 

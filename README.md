@@ -1,9 +1,11 @@
 # noti-sdk-py
 
 [![PyPI version](https://img.shields.io/pypi/v/noti-sdk-py.svg)](https://pypi.org/project/noti-sdk-py/)
+[![Python versions](https://img.shields.io/pypi/pyversions/noti-sdk-py.svg)](https://pypi.org/project/noti-sdk-py/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official Python SDK for NotiBuzz. A simple and powerful client for sending WhatsApp messages, managing media, and interacting with NotiBuzz APIs from any Python application or backend service.
+**noti-sdk-py** is a lightweight Python SDK for interacting with the Notibuzz Cloud REST API.
+It enables Python applications to programmatically send WhatsApp messages, automate notifications, and run bulk messaging campaigns with minimal configuration. Ideal for backend services, automation scripts, and data-driven workflows.
 
 ## Features
 
@@ -65,12 +67,12 @@ result = send_message(
         'payload': {
             'session': 'default',
             'chatId': '51987654321@c.us',
-            'text': '¡Hola desde el SDK!'
+                    'text': 'Hello from the SDK!'
         }
     }
 )
 
-print('Mensaje enviado:', result)
+print('Message sent:', result)
 ```
 
 ### List sessions
@@ -82,7 +84,7 @@ sessions = list_sessions(
     query={'all': True}  # Include STOPPED sessions
 )
 
-print('Sesiones disponibles:', sessions)
+print('Available sessions:', sessions)
 ```
 
 ## Bulk Messaging
@@ -102,7 +104,7 @@ result = send_message(
                 'payload': {
                     'session': 'default',
                     'chatId': '51987654321@c.us',
-                    'text': 'Mensaje 1'
+                    'text': 'Message 1'
                 }
             },
             {
@@ -110,7 +112,7 @@ result = send_message(
                 'payload': {
                     'session': 'default',
                     'chatId': '51987654322@c.us',
-                    'text': 'Mensaje 2'
+                    'text': 'Message 2'
                 }
             },
             {
@@ -123,7 +125,7 @@ result = send_message(
                         'filename': 'foto.jpg',
                         'url': 'https://example.com/image.jpg'
                     },
-                    'caption': 'Mira esta imagen'
+                    'caption': 'Check out this image'
                 }
             }
         ],
@@ -135,7 +137,7 @@ result = send_message(
     }
 )
 
-print('Campaña encolada:', result)
+print('Campaign enqueued:', result)
 # {'enqueued': True, 'jobId': 'send-bulk-...', 'count': 3, 'intervalMs': 20000}
 ```
 
@@ -151,7 +153,7 @@ result = send_message(
         'payload': {
             'session': 'default',
             'chatId': '51987654321@c.us',
-            'text': 'Mensaje único'
+                    'text': 'Single message'
         }
     }
 )
@@ -171,7 +173,7 @@ send_message(
         'payload': {
             'session': 'default',
             'chatId': '51987654321@c.us',
-            'text': 'Mensaje asíncrono'
+            'text': 'Async message'
         }
     },
     async_=True  # Queue the message
@@ -205,7 +207,7 @@ availability = bulk_availability(
     query={'requester': 'my-app'}
 )
 
-print('Disponibilidad:', availability)
+print('Availability:', availability)
 # {'available': True, 'current': 1, 'max': 2, 'origin': 'noti-sender-bridge'}
 ```
 
@@ -255,15 +257,27 @@ me = get_session_me(path_params={'session': 'default'})
 ### Profile
 
 ```python
-from noti_sdk_py import get_my_profile, set_profile_status, set_profile_picture
+from noti_sdk_py import (
+    get_my_profile,
+    set_profile_name,
+    set_profile_status,
+    set_profile_picture,
+    delete_profile_picture
+)
 
 # Get profile
 profile = get_my_profile(path_params={'session': 'default'})
 
+# Update profile name
+set_profile_name(
+    path_params={'session': 'default'},
+    body={'name': 'My New Name'}
+)
+
 # Update status (About)
 set_profile_status(
     path_params={'session': 'default'},
-    body={'status': '🎉 Usando Noti Sender!'}
+    body={'status': '🎉 Using Noti Sender!'}
 )
 
 # Update profile picture
@@ -277,6 +291,9 @@ set_profile_picture(
         }
     }
 )
+
+# Delete profile picture
+delete_profile_picture(path_params={'session': 'default'})
 ```
 
 ### Chatting
@@ -295,7 +312,7 @@ send_message(
         'payload': {
             'session': 'default',
             'chatId': '51987654321@c.us',
-            'text': 'Hola!'
+            'text': 'Hello!'
         }
     }
 )
@@ -312,7 +329,189 @@ send_message(
                 'filename': 'foto.jpg',
                 'url': 'https://example.com/image.jpg'
             },
-            'caption': 'Mira esto'
+            'caption': 'Check this out'
+        }
+    }
+)
+
+# Send file
+send_message(
+    body={
+        'type': 'file',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'file': {
+                'mimetype': 'application/pdf',
+                'filename': 'document.pdf',
+                'url': 'https://example.com/document.pdf'
+            },
+            'caption': 'Important document'
+        }
+    }
+)
+
+# Send voice note
+send_message(
+    body={
+        'type': 'voice',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'file': {
+                'mimetype': 'audio/ogg; codecs=opus',
+                'url': 'https://example.com/voice.opus'
+            },
+            'convert': False  # True if you need format conversion
+        }
+    }
+)
+
+# Send video
+send_message(
+    body={
+        'type': 'video',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'file': {
+                'mimetype': 'video/mp4',
+                'filename': 'video.mp4',
+                'url': 'https://example.com/video.mp4'
+            },
+            'caption': 'Watch this video',
+            'asNote': False,  # True for round video
+            'convert': False
+        }
+    }
+)
+
+# Send poll
+send_message(
+    body={
+        'type': 'poll',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'poll': {
+                'name': 'What is your favorite color?',
+                'options': ['Red', 'Blue', 'Green'],
+                'selectableOptionsCount': 1
+            }
+        }
+    }
+)
+
+# Send location
+send_message(
+    body={
+        'type': 'location',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'latitude': -12.097633,
+            'longitude': -77.019575,
+            'title': 'Our office'
+        }
+    }
+)
+
+# Send contact (vCard)
+send_message(
+    body={
+        'type': 'contact-vcard',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'contacts': [
+                {
+                    'fullName': 'John Doe',
+                    'organization': 'Company Name',
+                    'phoneNumber': '+51 987 654 321',
+                    'whatsappId': '51987654321'
+                }
+            ]
+        }
+    }
+)
+
+# Send list (interactive list)
+send_message(
+    body={
+        'type': 'list',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'message': {
+                'title': 'Simple Menu',
+                'description': 'Please choose an option',
+                'footer': 'Thank you!',
+                'button': 'Choose',
+                'sections': [
+                    {
+                        'title': 'Main',
+                        'rows': [
+                            {
+                                'title': 'Option 1',
+                                'rowId': 'option1',
+                                'description': 'Option 1 description'
+                            },
+                            {
+                                'title': 'Option 2',
+                                'rowId': 'option2',
+                                'description': 'Option 2 description'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+)
+
+# Send message with custom link preview
+send_message(
+    body={
+        'type': 'link-custom-preview',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'text': 'Check this out! https://github.com/',
+            'linkPreviewHighQuality': True,
+            'preview': {
+                'image': {
+                    'url': 'https://picsum.photos/400/300'
+                },
+                'url': 'https://github.com/',
+                'title': 'Your Title',
+                'description': 'Check this out, amazing!'
+            }
+        }
+    }
+)
+
+# Forward message
+send_message(
+    body={
+        'type': 'forward',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'forward': {
+                'keyId': 'true_51987654322@c.us_AAAAAAAAAAAAAAAAAAAA'
+            }
+        }
+    }
+)
+
+# Mark as seen using sendMessage with type 'seen'
+send_message(
+    body={
+        'type': 'seen',
+        'payload': {
+            'session': 'default',
+            'chatId': '51987654321@c.us',
+            'messages': ['false_51987654321@c.us_AAAAAAAAAAAAAAAAAAAA']
         }
     }
 )
@@ -346,14 +545,14 @@ stop_typing(
 ### Status (Stories)
 
 ```python
-from noti_sdk_py import status_text, status_image, status_delete
+from noti_sdk_py import status_text, status_image, status_voice, status_video, status_delete
 
 # Create text Story
 status_text(
     path_params={'session': 'default'},
     body={
         'contacts': [],  # [] to send to all
-        'text': 'Mira esto! https://github.com/',
+        'text': 'Check this out! https://github.com/',
         'backgroundColor': '#38b42f',
         'font': 0,
         'linkPreview': True
@@ -365,12 +564,41 @@ status_image(
     path_params={'session': 'default'},
     body={
         'contacts': ['51987654321@c.us'],
-        'caption': 'Mi Story',
+        'caption': 'My Story',
         'file': {
             'mimetype': 'image/jpeg',
             'filename': 'status.jpg',
             'url': 'https://example.com/image.jpg'
         }
+    }
+)
+
+# Create voice Story
+status_voice(
+    path_params={'session': 'default'},
+    body={
+        'contacts': ['51987654321@c.us'],
+        'backgroundColor': '#38b42f',
+        'file': {
+            'mimetype': 'audio/ogg; codecs=opus',
+            'url': 'https://example.com/voice.opus'
+        },
+        'convert': False
+    }
+)
+
+# Create video Story
+status_video(
+    path_params={'session': 'default'},
+    body={
+        'contacts': ['51987654321@c.us'],
+        'caption': 'My video Story',
+        'file': {
+            'mimetype': 'video/mp4',
+            'filename': 'status.mp4',
+            'url': 'https://example.com/status.mp4'
+        },
+        'convert': False
     }
 )
 
@@ -389,10 +617,14 @@ status_delete(
 from noti_sdk_py import (
     chats_get,
     chats_overview_get,
+    chats_overview_post,
     chats_get_messages,
+    chats_get_message,
     chats_read_messages,
+    chats_delete_message,
     chats_edit_message,
     chats_pin_message,
+    chats_unpin_message,
 )
 
 # List chats
@@ -402,6 +634,16 @@ chats = chats_get(path_params={'session': 'default'})
 overview = chats_overview_get(
     path_params={'session': 'default'},
     query={'limit': 20, 'offset': 0}
+)
+
+# Get chat overview (POST method with filters)
+overview_post = chats_overview_post(
+    path_params={'session': 'default'},
+    body={
+        'limit': 20,
+        'offset': 0,
+        'ids': ['51987654321@c.us']  # Optional: filter by chat IDs
+    }
 )
 
 # Get chat messages
@@ -415,6 +657,16 @@ messages = chats_get_messages(
         'offset': 0,
         'downloadMedia': True
     }
+)
+
+# Get a specific message by ID
+message = chats_get_message(
+    path_params={
+        'session': 'default',
+        'chatId': '51987654321@c.us',
+        'messageId': 'false_51987654321@c.us_AAAAAAAAAAAAAAAAAAAA'
+    },
+    query={'downloadMedia': True}
 )
 
 # Mark messages as read
@@ -437,8 +689,17 @@ chats_edit_message(
         'messageId': 'false_51987654321@c.us_AAAAAAAAAAAAAAAAAAAA'
     },
     body={
-        'text': 'Mensaje editado',
+        'text': 'Edited message',
         'linkPreview': True
+    }
+)
+
+# Delete message
+chats_delete_message(
+    path_params={
+        'session': 'default',
+        'chatId': '51987654321@c.us',
+        'messageId': 'false_51987654321@c.us_AAAAAAAAAAAAAAAAAAAA'
     }
 )
 
@@ -453,6 +714,15 @@ chats_pin_message(
         'duration': 86400  # 24 hours
     }
 )
+
+# Unpin message
+chats_unpin_message(
+    path_params={
+        'session': 'default',
+        'chatId': '51987654321@c.us',
+        'messageId': 'false_51987654321@c.us_AAAAAAAAAAAAAAAAAAAA'
+    }
+)
 ```
 
 ### Contacts
@@ -463,6 +733,9 @@ from noti_sdk_py import (
     contacts_get_basic,
     contacts_check_exists,
     contacts_profile_picture,
+    contacts_get_about,
+    contacts_block,
+    contacts_unblock,
     contacts_upsert,
 )
 
@@ -494,6 +767,30 @@ picture = contacts_profile_picture(
     }
 )
 
+# Get contact about (status)
+about = contacts_get_about(
+    query={
+        'session': 'default',
+        'contactId': '51987654321@c.us'
+    }
+)
+
+# Block contact
+contacts_block(
+    path_params={
+        'session': 'default',
+        'chatId': '51987654321@c.us'
+    }
+)
+
+# Unblock contact
+contacts_unblock(
+    path_params={
+        'session': 'default',
+        'chatId': '51987654321@c.us'
+    }
+)
+
 # Create or update contact
 contacts_upsert(
     path_params={
@@ -501,8 +798,8 @@ contacts_upsert(
         'chatId': '51987654321@c.us'
     },
     body={
-        'firstName': 'Juan',
-        'lastName': 'Pérez'
+        'firstName': 'John',
+        'lastName': 'Doe'
     }
 )
 ```
@@ -520,11 +817,11 @@ try:
             'payload': {
                 'session': 'default',
                 'chatId': '51987654321@c.us',
-                'text': 'Hola'
+                'text': 'Hello'
             }
         }
     )
-    print('Éxito:', result)
+    print('Success:', result)
 except requests.RequestException as error:
     print('Error:', str(error))
     # Error message includes HTTP code and details
@@ -536,6 +833,23 @@ except requests.RequestException as error:
 - Python >= 3.8
 - requests >= 2.28.0
 
+## More Examples
+
+For complete, runnable examples organized by category, see the [`examples/`](examples/) directory:
+
+- **Sessions**: List, get session info, get authenticated account
+- **Profile**: Get profile, update name/status/picture, delete picture
+- **Chatting**: All message types (text, image, file, voice, video, poll, location, contact, list, link preview, forward), reactions, typing indicators
+- **Status**: Text, image, voice, video statuses, delete status
+- **Chats**: List chats, get messages, edit/delete/pin/unpin messages, mark as read
+- **Contacts**: Get contacts, check existence, profile pictures, block/unblock, upsert
+
+Run any example:
+```bash
+python examples/sessions/list_sessions.py
+python examples/chatting/send_text.py
+```
+
 ## API Reference
 
 All endpoints are documented with type hints. For the complete list of endpoints and their parameters, see the [Bridge documentation](https://github.com/notibuzz/noti-sender-bridge).
@@ -546,7 +860,7 @@ All endpoints are documented with type hints. For the complete list of endpoints
 - **Profile**: `get_my_profile`, `set_profile_name`, `set_profile_status`, `set_profile_picture`, `delete_profile_picture`
 - **Chatting**: `send_message` (generic endpoint for all types: text, image, file, voice, video, poll, location, contact-vcard, forward, list), `reaction`, `start_typing`, `stop_typing`
 - **Status**: `status_text`, `status_image`, `status_voice`, `status_video`, `status_delete`
-- **Chats**: `chats_get`, `chats_overview_get`, `chats_overview_post`, `chats_get_messages`, `chats_read_messages`, `chats_get_message`, `chats_delete_message`, `chats_edit_message`, `chats_pin_message`, `chats_unpin_message`, `chats_archive`, `chats_unarchive`, `chats_unread`
+- **Chats**: `chats_get`, `chats_overview_get`, `chats_overview_post`, `chats_get_messages`, `chats_read_messages`, `chats_get_message`, `chats_delete_message`, `chats_edit_message`, `chats_pin_message`, `chats_unpin_message`
 - **Contacts**: `contacts_get_all`, `contacts_get_basic`, `contacts_check_exists`, `contacts_profile_picture`, `contacts_get_about`, `contacts_block`, `contacts_unblock`, `contacts_upsert`
 - **Bulk**: `bulk_stop_campaign`, `bulk_resume_campaign`, `bulk_availability`
 
@@ -571,10 +885,5 @@ MIT License - see [LICENSE](LICENSE) for more details.
 
 ## Changelog
 
-### 1.0.0
-- Initial release
-- Full support for all Bridge endpoints
-- Bulk messaging with anti-ban control
-- Async queue
-- Campaign control
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
