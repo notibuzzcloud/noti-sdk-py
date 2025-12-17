@@ -546,7 +546,7 @@ All endpoints are documented with type hints. For the complete list of endpoints
 - **Profile**: `get_my_profile`, `set_profile_name`, `set_profile_status`, `set_profile_picture`, `delete_profile_picture`
 - **Chatting**: `send_message` (generic endpoint for all types: text, image, file, voice, video, poll, location, contact-vcard, forward, list), `reaction`, `start_typing`, `stop_typing`
 - **Status**: `status_text`, `status_image`, `status_voice`, `status_video`, `status_delete`
-- **Chats**: `chats_get`, `chats_overview_get`, `chats_overview_post`, `chats_get_messages`, `chats_read_messages`, `chats_get_message`, `chats_delete_message`, `chats_edit_message`, `chats_pin_message`, `chats_unpin_message`, `chats_archive`, `chats_unarchive`, `chats_unread`
+- **Chats**: `chats_get`, `chats_overview_get`, `chats_overview_post`, `chats_get_messages`, `chats_read_messages`, `chats_get_message`, `chats_delete_message`, `chats_edit_message`, `chats_pin_message`, `chats_unpin_message`
 - **Contacts**: `contacts_get_all`, `contacts_get_basic`, `contacts_check_exists`, `contacts_profile_picture`, `contacts_get_about`, `contacts_block`, `contacts_unblock`, `contacts_upsert`
 - **Bulk**: `bulk_stop_campaign`, `bulk_resume_campaign`, `bulk_availability`
 

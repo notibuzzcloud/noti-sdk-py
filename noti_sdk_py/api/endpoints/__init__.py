@@ -22,9 +22,6 @@ from .chats import (
     chats_edit_message,
     chats_pin_message,
     chats_unpin_message,
-    chats_archive,
-    chats_unarchive,
-    chats_unread,
 )
 from .contacts import (
     contacts_get_all,
@@ -72,9 +69,6 @@ __all__ = [
     "chats_edit_message",
     "chats_pin_message",
     "chats_unpin_message",
-    "chats_archive",
-    "chats_unarchive",
-    "chats_unread",
     # Contacts
     "contacts_get_all",
     "contacts_get_basic",
