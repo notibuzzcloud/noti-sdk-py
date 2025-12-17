@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "noti-sdk-py"
-version = "1.0.0"
-description = "Official Python SDK for NotiBuzz. A simple and powerful client for sending WhatsApp messages, managing media, and interacting with NotiBuzz APIs from any Python application or backend service."
+version = "1.0.1"
+description = "Lightweight Python SDK for WhatsApp messaging and bulk messaging via the Notibuzz Cloud REST API."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -16,19 +16,18 @@ keywords = [
     "notibuzz",
     "sdk",
     "whatsapp",
+    "whatsapp-messages",
+    "bulk-messaging",
     "messaging",
     "api",
-    "python",
+    "notifications",
+    "rest-api",
+    "saas",
+    "notibuzz",
     "notibuzz-cloud",
-    "masive-messaging",
-    "bulk-messaging",
-    "async-messaging",
-    "campaign-control",
-    "session-control",
-    "chat-control",
-    "contact-control",
-    "message-control",
-    "status-control"
+    "notibuzz-sdk",
+    "notibuzz-cloud-sdk",
+    "automation"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -58,4 +57,3 @@ packages = ["noti_sdk_py", "noti_sdk_py.api", "noti_sdk_py.api.endpoints", "noti
 
 [tool.setuptools.package-data]
 "*" = ["*.md", "LICENSE"]
-
