@@ -19,7 +19,7 @@ Esta guía explica cómo publicar `noti-sdk-py` en PyPI y GitHub.
 
 Asegúrate de que los archivos de configuración tengan:
 - ✅ Nombre único en PyPI (`noti-sdk-py`)
-- ✅ Versión correcta (`1.0.0`)
+- ✅ Versión correcta (`1.0.1`)
 - ✅ Descripción clara
 - ✅ Keywords relevantes
 - ✅ Repository URL correcta
@@ -95,8 +95,8 @@ python -m build
 ```
 
 Esto generará:
-- `dist/noti-sdk-py-1.0.0.tar.gz` (source distribution)
-- `dist/noti-sdk_py-1.0.0-py3-none-any.whl` (wheel)
+- `dist/noti-sdk-py-1.0.1.tar.gz` (source distribution)
+- `dist/noti_sdk_py-1.0.1-py3-none-any.whl` (wheel)
 
 #### Paso 4: Verificar el paquete (Recomendado)
 
@@ -140,13 +140,13 @@ Ingresa tu username (o `__token__`) y password (o API token) cuando se solicite.
 
    O usa bump2version (instalar: `pip install bump2version`):
    ```bash
-   # Versión patch (1.0.0 -> 1.0.1)
+   # Versión patch (1.0.1 -> 1.0.2)
    bump2version patch
    
-   # Versión minor (1.0.0 -> 1.1.0)
+   # Versión minor (1.0.1 -> 1.1.0)
    bump2version minor
    
-   # Versión major (1.0.0 -> 2.0.0)
+   # Versión major (1.0.1 -> 2.0.0)
    bump2version major
    ```
 
@@ -190,7 +190,7 @@ git remote add origin https://github.com/notibuzzcloud/noti-sdk-py.git
 git add .
 
 # Commit inicial
-git commit -m "Initial commit: noti-sdk-py v1.0.0"
+git commit -m "Initial commit: noti-sdk-py v1.0.1"
 
 # Push a GitHub
 git branch -M main
@@ -201,9 +201,9 @@ git push -u origin main
 
 1. Ve a tu repositorio en GitHub
 2. Click en "Releases" → "Create a new release"
-3. Tag: `v1.0.0`
-4. Title: `v1.0.0 - Initial Release`
-5. Description: Copia el contenido de CHANGELOG.md
+3. Tag: `v1.0.1`
+4. Title: `v1.0.1 - SDK Synchronization and Documentation Updates`
+5. Description: Copia el contenido de CHANGELOG.md para v1.0.1
 6. Publicar release
 
 ## Verificación
