@@ -7,6 +7,11 @@
 **noti-sdk-py** is a lightweight Python SDK for interacting with the Notibuzz Cloud REST API.
 It enables Python applications to programmatically send WhatsApp messages, automate notifications, and run bulk messaging campaigns with minimal configuration. Ideal for backend services, automation scripts, and data-driven workflows.
 
+### 📚 Official documentation & DEMO
+
+- **Full API documentation:** [https://notibuzz.com/api-docs](https://notibuzz.com/api-docs) — Complete REST reference for all endpoints, parameters, and examples.
+- **Request a DEMO:** You can request a Notibuzz Cloud demonstration at [notibuzz.com](https://notibuzz.com) to try the platform before integrating.
+
 ## Features
 
 - ✅ **Full Python support** - Type hints and autocompletion
@@ -880,6 +885,8 @@ MIT License - see [LICENSE](LICENSE) for more details.
 
 ## Support
 
+- **API Docs (official documentation)**: [https://notibuzz.com/api-docs](https://notibuzz.com/api-docs)
+- **Request a DEMO**: [notibuzz.com](https://notibuzz.com) — request a platform demonstration
 - **Issues**: [GitHub Issues](https://github.com/notibuzzcloud/noti-sdk-py/issues)
 - **Documentation**: [README](README.md)
 
