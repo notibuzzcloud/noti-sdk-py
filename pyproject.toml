@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "noti-sdk-py"
-version = "1.0.2"
+version = "1.0.3"
 description = "Lightweight Python SDK for WhatsApp messaging and bulk messaging via the Notibuzz Cloud REST API."
 readme = "README.md"
 requires-python = ">=3.8"

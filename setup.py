@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="noti-sdk-py",
-    version="1.0.2",
+    version="1.0.3",
     author="Diego Quiroz Ramirez - CEO NotiBuzz Cloud",
     author_email="",
     description="Lightweight Python SDK for WhatsApp messaging and bulk messaging via the Notibuzz Cloud REST API.",

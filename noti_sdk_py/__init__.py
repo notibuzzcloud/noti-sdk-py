@@ -57,13 +57,17 @@ from .api.endpoints import (
     contacts_unblock,
     contacts_upsert,
     # Bulk
+    list_bulk_jobs,
+    pause_bulk_job,
+    resume_bulk_job,
+    cancel_bulk_job,
     bulk_stop_campaign,
     bulk_resume_campaign,
     bulk_availability,
 )
 from .api.endpoints.chatting import MessageType
 
-__version__ = "1.0.1"
+__version__ = "1.0.3"
 __all__ = [
     # Client
     "configure_client",
@@ -113,6 +117,10 @@ __all__ = [
     "contacts_unblock",
     "contacts_upsert",
     # Bulk
+    "list_bulk_jobs",
+    "pause_bulk_job",
+    "resume_bulk_job",
+    "cancel_bulk_job",
     "bulk_stop_campaign",
     "bulk_resume_campaign",
     "bulk_availability",

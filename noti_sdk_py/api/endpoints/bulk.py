@@ -16,6 +16,87 @@ def _make_path(template: str, params: Optional[Dict[str, Any]] = None) -> str:
     return result
 
 
+def list_bulk_jobs(
+    path_params: Optional[Dict[str, Any]] = None,
+    query: Optional[Dict[str, Any]] = None,
+    body: Optional[Any] = None,
+) -> Any:
+    """
+    List bulk messaging jobs (waiting, delayed, active).
+
+    Method: GET
+    Path: /api/bulk/jobs
+
+    Returns:
+        Object with ok, jobs list, and total.
+    """
+    path = _make_path("/api/bulk/jobs", path_params)
+    return get_client().get(path, query)
+
+
+def pause_bulk_job(
+    path_params: Optional[Dict[str, Any]] = None,
+    query: Optional[Dict[str, Any]] = None,
+    body: Optional[Any] = None,
+) -> Any:
+    """
+    Pause a bulk job by jobId.
+
+    Method: POST
+    Path: /api/bulk/jobs/{jobId}/pause
+
+    Args:
+        path_params: Must include 'jobId'.
+
+    Returns:
+        Result with ok, jobId, paused, pausedAt, keysTTLSeconds.
+    """
+    path = _make_path("/api/bulk/jobs/{jobId}/pause", path_params)
+    return get_client().post(path, body)
+
+
+def resume_bulk_job(
+    path_params: Optional[Dict[str, Any]] = None,
+    query: Optional[Dict[str, Any]] = None,
+    body: Optional[Any] = None,
+) -> Any:
+    """
+    Resume a paused bulk job.
+
+    Method: POST
+    Path: /api/bulk/jobs/{jobId}/resume
+
+    Args:
+        path_params: Must include 'jobId'.
+
+    Returns:
+        Result with ok, jobId, resumed.
+    """
+    path = _make_path("/api/bulk/jobs/{jobId}/resume", path_params)
+    return get_client().post(path, body)
+
+
+def cancel_bulk_job(
+    path_params: Optional[Dict[str, Any]] = None,
+    query: Optional[Dict[str, Any]] = None,
+    body: Optional[Any] = None,
+) -> Any:
+    """
+    Cancel a bulk job.
+
+    Method: POST
+    Path: /api/bulk/jobs/{jobId}/cancel
+
+    Args:
+        path_params: Must include 'jobId'.
+
+    Returns:
+        Result with ok, jobId, removed, cancelKeySet, keysTTLSeconds.
+    """
+    path = _make_path("/api/bulk/jobs/{jobId}/cancel", path_params)
+    return get_client().post(path, body)
+
+
 def bulk_stop_campaign(
     path_params: Optional[Dict[str, Any]] = None,
     query: Optional[Dict[str, Any]] = None,

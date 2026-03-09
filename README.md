@@ -242,6 +242,32 @@ bulk_resume_campaign(
 )
 ```
 
+### Bulk Jobs (list, pause, resume, cancel)
+
+When you send bulk messages via the API, each campaign is enqueued as a **job**. You can list jobs, pause a running job, resume it, or cancel it.
+
+```python
+from noti_sdk_py import (
+    list_bulk_jobs,
+    pause_bulk_job,
+    resume_bulk_job,
+    cancel_bulk_job,
+)
+
+# List all bulk jobs (waiting, delayed, active)
+result = list_bulk_jobs()
+# result: {"ok": True, "jobs": [...], "total": N}
+
+# Pause a job (e.g. to stop sending temporarily)
+pause_bulk_job(path_params={"jobId": "send-bulk-1234567890-ab12"})
+
+# Resume a paused job
+resume_bulk_job(path_params={"jobId": "send-bulk-1234567890-ab12"})
+
+# Cancel a job (removes from queue, releases locks)
+cancel_bulk_job(path_params={"jobId": "send-bulk-1234567890-ab12"})
+```
+
 ## Examples by Category
 
 ### Sessions
@@ -867,7 +893,7 @@ All endpoints are documented with type hints. For the complete list of endpoints
 - **Status**: `status_text`, `status_image`, `status_voice`, `status_video`, `status_delete`
 - **Chats**: `chats_get`, `chats_overview_get`, `chats_overview_post`, `chats_get_messages`, `chats_read_messages`, `chats_get_message`, `chats_delete_message`, `chats_edit_message`, `chats_pin_message`, `chats_unpin_message`
 - **Contacts**: `contacts_get_all`, `contacts_get_basic`, `contacts_check_exists`, `contacts_profile_picture`, `contacts_get_about`, `contacts_block`, `contacts_unblock`, `contacts_upsert`
-- **Bulk**: `bulk_stop_campaign`, `bulk_resume_campaign`, `bulk_availability`
+- **Bulk**: `list_bulk_jobs`, `pause_bulk_job`, `resume_bulk_job`, `cancel_bulk_job`, `bulk_stop_campaign`, `bulk_resume_campaign`, `bulk_availability`
 
 ## Contributing
 
